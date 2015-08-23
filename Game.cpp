@@ -92,8 +92,7 @@ void Game::run()
 	Ogre::Entity* groundEntity = mSceneManager->createEntity("ground");
 	mSceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
 	groundEntity->setCastShadows(false);
-	//groundEntity->setMaterialName("Examples/Rockwall");
-	groundEntity->setMaterialName("Rockwall");
+	groundEntity->setMaterialName("Examples/Rockwall");
 
 	Ogre::Light* spotLight = mSceneManager->createLight("SpotLight");
 	spotLight->setDiffuseColour(0, 0, 1.0);
