@@ -35,7 +35,7 @@ Game::Game(void)
 //-----------------------------------------------------------------------------
 Game::~Game(void)
 {
-	destroyInput();
+	//destroyInput();
 
 	if (mViewport)
 		delete mViewport;
@@ -66,7 +66,7 @@ void Game::run()
 	createSceneManager();
 	createCamera();
 	createViewport();
-	createInput();
+	//createInput();
 	setupResourceManager();
 
 	Ogre::Entity *ogreHead = mSceneManager->createEntity("OgreHead", "ogrehead.mesh");	
@@ -166,7 +166,7 @@ bool Game::frameStarted(const Ogre::FrameEvent &fe)
 {
 	if (mWindow->isClosed())
 		return false;
-	captureInput();
+	//captureInput();
 	return true;
 }
 
@@ -175,6 +175,7 @@ bool Game::frameEnded(const Ogre::FrameEvent &fe)
 	return true;
 }
 
+/*
 void Game::captureInput()
 {
 	if (mMouse != NULL)
@@ -214,4 +215,4 @@ void Game::destroyInput()
 		mInputManager->destroyInputObject(mKeyboard);
 	OIS::InputManager::destroyInputSystem(mInputManager);
 	mInputManager = NULL;
-}
+}*/

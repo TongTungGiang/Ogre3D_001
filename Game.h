@@ -4,7 +4,7 @@
 // Ogre's header files
 #include <OGRE\Ogre.h>
 #include <OGRE\OgreSceneManager.h>
-#include <OIS\OIS.h>
+//#include <OIS\OIS.h>
 
 // STL's header files
 #include <string>
@@ -81,17 +81,17 @@ protected:
 
 	bool frameEnded(const Ogre::FrameEvent &fe);
 
-private:
+//private:
 
-	OIS::Mouse *mMouse;
-	OIS::Keyboard *mKeyboard;
-	OIS::InputManager *mInputManager;
+//	OIS::Mouse *mMouse;
+//	OIS::Keyboard *mKeyboard;
+//	OIS::InputManager *mInputManager;
 
-private:
+//private:
 
-	void createInput();
-	void destroyInput();
-	void captureInput();
+//	void createInput();
+//	void destroyInput();
+//	void captureInput();
 
 };
 
