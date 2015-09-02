@@ -6,7 +6,7 @@ Game *Game::mInstance = NULL;
 //-----------------------------------------------------------------------------
 Game* Game::getInstance()
 {
-	if (mInstance == nullptr)
+	if (mInstance == NULL)
 	{
 		mInstance = new Game();
 	}
@@ -35,7 +35,7 @@ Game::Game(void)
 //-----------------------------------------------------------------------------
 Game::~Game(void)
 {
-	//destroyInput();
+	destroyInput();
 
 	if (mViewport)
 		delete mViewport;
@@ -66,7 +66,7 @@ void Game::run()
 	createSceneManager();
 	createCamera();
 	createViewport();
-	//createInput();
+	createInput();
 	setupResourceManager();
 
 	Ogre::Entity *ogreHead = mSceneManager->createEntity("OgreHead", "ogrehead.mesh");	
@@ -157,7 +157,8 @@ void Game::createViewport()
 //-----------------------------------------------------------------------------
 void Game::setupResourceManager()
 {
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("D:\\Projects\\Ogre3D\\Ogre3D_001\\resource", "FileSystem", "General");
+	//Ogre::ResourceGroupManager::getSingleton().addResourceLocation("D:\\Projects\\Ogre3D\\Ogre3D_001\\resource", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./Resource", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
 }
@@ -166,7 +167,7 @@ bool Game::frameStarted(const Ogre::FrameEvent &fe)
 {
 	if (mWindow->isClosed())
 		return false;
-	//captureInput();
+	captureInput();
 	return true;
 }
 
@@ -175,13 +176,32 @@ bool Game::frameEnded(const Ogre::FrameEvent &fe)
 	return true;
 }
 
-/*
 void Game::captureInput()
 {
 	if (mMouse != NULL)
 		mMouse->capture();
 	if (mKeyboard != NULL)
+	{
 		mKeyboard->capture();
+		Ogre::Vector3 movement = Ogre::Vector3(0, 0, 0);
+		if (mKeyboard->isKeyDown(OIS::KC_D))
+		{
+			movement = Ogre::Vector3(1, 0, 0);
+		}
+		else if (mKeyboard->isKeyDown(OIS::KC_A))
+		{
+			movement = Ogre::Vector3(-1, 0, 0);
+		}
+		else if (mKeyboard->isKeyDown(OIS::KC_W))
+		{
+			movement = Ogre::Vector3(0, 0, -1);
+		}
+		else if (mKeyboard->isKeyDown(OIS::KC_S))
+		{
+			movement = Ogre::Vector3(0, 0, 1);
+		}
+		mSceneManager->getSceneNode("Head Node")->translate(movement, Ogre::Node::TS_LOCAL);
+	}
 }
 
 void Game::createInput()
@@ -215,4 +235,4 @@ void Game::destroyInput()
 		mInputManager->destroyInputObject(mKeyboard);
 	OIS::InputManager::destroyInputSystem(mInputManager);
 	mInputManager = NULL;
-}*/
+}
