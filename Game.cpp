@@ -179,7 +179,19 @@ bool Game::frameEnded(const Ogre::FrameEvent &fe)
 void Game::captureInput()
 {
 	if (mMouse != NULL)
+	{
 		mMouse->capture();
+		Ogre::Vector3 movement = Ogre::Vector3(0, 0, 0);
+		if (mMouse->getMouseState().buttonDown(OIS::MB_Left))
+		{
+			movement = Ogre::Vector3(1, 0, 0);
+		}
+		else if (mMouse->getMouseState().buttonDown(OIS::MB_Right))
+		{
+			movement = Ogre::Vector3(-1, 0, 0);
+		}
+		mSceneManager->getSceneNode("Head Node 1")->translate(movement, Ogre::Node::TS_LOCAL);
+	}
 	if (mKeyboard != NULL)
 	{
 		mKeyboard->capture();
